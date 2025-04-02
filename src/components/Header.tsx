@@ -1,56 +1,121 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Home, User, FolderGit2, Mail, Menu, X } from "lucide-react";
+import { Home, User, FolderGit2, Mail } from "lucide-react";
 import Lottie from 'lottie-react'
 import DeveloperAnimation from '../assets/animations/developer.json'
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // Mobile menu state is only used in the floating dock which is handled by CSS
   const [activeTab, setActiveTab] = useState("home");
 
-  // Handle scroll effect
+  // Handle scroll effect with improved section detection
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      // Get all sections
-      const sections = ["home", "about", "projects", "contact"];
-      
-      // Find which section is currently in view
-      const current = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          // Add some buffer (100px) to make the detection feel more natural
-          return rect.top <= 100 && rect.bottom >= 100;
-        }
-        return false;
-      });
+    // Debounce function to prevent too many updates
+    let scrollTimeout: ReturnType<typeof setTimeout>;
 
-      if (current) {
-        setActiveTab(current);
-      }
+    const handleScroll = () => {
+      // Update header background based on scroll position
+      setIsScrolled(window.scrollY > 50);
+
+      // Clear timeout if it exists
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+
+      // Set a small timeout to debounce the section detection
+      scrollTimeout = setTimeout(() => {
+        // Get all sections
+        const sections = ["home", "about", "projects", "contact"];
+
+        // Calculate the viewport height
+        const viewportHeight = window.innerHeight;
+
+        // Track which section has the most visibility
+        let maxVisibleSection = "";
+        let maxVisiblePercentage = 0;
+
+        // Check each section
+        sections.forEach(sectionId => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+
+            // Calculate how much of the section is visible in the viewport
+            const visibleTop = Math.max(0, rect.top);
+            const visibleBottom = Math.min(viewportHeight, rect.bottom);
+            const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+
+            // Calculate what percentage of the viewport this section occupies
+            const visiblePercentage = visibleHeight / viewportHeight;
+
+            // Special case for the home section (give it priority when at the top)
+            const isHome = sectionId === "home";
+            const homeBonus = isHome && rect.top <= 0 ? 0.2 : 0;
+
+            // Special case for the last section (contact) - give it priority when scrolled to bottom
+            const isContact = sectionId === "contact";
+            const contactBonus = isContact && window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 ? 0.5 : 0;
+
+            // Apply bonuses to the visible percentage
+            const adjustedPercentage = visiblePercentage + homeBonus + contactBonus;
+
+            // Update the max visible section if this one has more visibility
+            if (adjustedPercentage > maxVisiblePercentage) {
+              maxVisiblePercentage = adjustedPercentage;
+              maxVisibleSection = sectionId;
+            }
+          }
+        });
+
+        // Only update the active tab if we found a section with some visibility
+        if (maxVisibleSection && maxVisiblePercentage > 0.1) {
+          setActiveTab(maxVisibleSection);
+        }
+      }, 50); // 50ms debounce
     };
+
+    // Initial check
+    handleScroll();
+
+    // Add scroll listener
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    // Clean up
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+    };
   }, []);
 
-  // Smooth scroll handler
+  // Improved smooth scroll handler with better offset calculation
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      const offset = 100;
+      // Adjust offset based on section and device
+      let offset = 100; // Default offset
+
+      // Special case for home section
+      if (id === "home") {
+        offset = 0; // No offset for home section
+      }
+
+      // Special case for mobile devices
+      if (window.innerWidth < 768) {
+        offset = id === "home" ? 0 : 80; // Smaller offset on mobile
+      }
+
+      // Calculate position with offset
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
+      // Smooth scroll to position
       window.scrollTo({
         top: offsetPosition,
         behavior: "smooth"
       });
 
+      // Update active tab
       setActiveTab(id);
-      setMobileMenuOpen(false);
     }
   };
 
@@ -65,9 +130,8 @@ const Header = () => {
     <>
       {/* Desktop Header */}
       <header
-        className={`fixed w-full z-[9998] transition-all duration-300 md:block hidden ${
-          isScrolled ? "backdrop-blur-md py-4" : "bg-transparent py-6"
-        }`}
+        className={`fixed w-full z-[9998] transition-all duration-300 md:block hidden ${isScrolled ? "backdrop-blur-md py-4" : "bg-transparent py-6"
+          }`}
       >
         <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
           {/* Logo/Name */}
@@ -97,10 +161,10 @@ const Header = () => {
               >
                 <item.icon className="w-5 h-5" />
                 {item.label}
-                <span 
+                <span
                   className={`absolute left-0 bottom-0 h-[2px] bg-gradient-to-r from-blue-400 to-purple-600 transition-all duration-300
                     ${activeTab === item.id ? 'w-full' : 'w-0 group-hover:w-full'}
-                  `} 
+                  `}
                 />
               </motion.a>
             ))}
@@ -122,11 +186,10 @@ const Header = () => {
                 key={item.id}
                 href={`#${item.id}`}
                 onClick={(e) => handleSmoothScroll(e, item.id)}
-                className={`relative p-3 group transition-all duration-300 ${
-                  activeTab === item.id 
-                    ? "bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white" 
-                    : "text-white/60 hover:text-white/90"
-                } rounded-full`}
+                className={`relative p-3 group transition-all duration-300 ${activeTab === item.id
+                  ? "bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white"
+                  : "text-white/60 hover:text-white/90"
+                  } rounded-full`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
