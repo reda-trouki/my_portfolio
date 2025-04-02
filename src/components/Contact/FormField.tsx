@@ -1,6 +1,6 @@
 // FormField.jsx
 import React from 'react';
-import {motion} from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -28,8 +28,8 @@ const FormField = ({
 }: FormFieldProps) => {
   return (
     <div className="group relative">
-      <Label 
-        htmlFor={id} 
+      <Label
+        htmlFor={id}
         className="text-white/80 text-sm font-medium block mb-2 transition-colors group-focus-within:text-blue-400"
       >
         {label}

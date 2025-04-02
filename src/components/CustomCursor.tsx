@@ -212,7 +212,7 @@ const CustomCursor = () => {
     interactiveElements.forEach((el) => {
       el.addEventListener("mouseenter", handleLinkHoverEnter);
       el.addEventListener("mouseleave", handleLinkHoverLeave);
-      el.style.cursor = "none";
+      (el as HTMLElement).style.cursor = "none";
     });
 
     return () => {
@@ -226,7 +226,7 @@ const CustomCursor = () => {
       interactiveElements.forEach((el) => {
         el.removeEventListener("mouseenter", handleLinkHoverEnter);
         el.removeEventListener("mouseleave", handleLinkHoverLeave);
-        el.style.cursor = "auto";
+        (el as HTMLElement).style.cursor = "auto";
       });
       
       // Cancel animation frame

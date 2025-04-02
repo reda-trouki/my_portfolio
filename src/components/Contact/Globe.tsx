@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
-import { Line2 } from 'three/examples/jsm/lines/Line2';
-import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
+import { Line2 } from 'three/examples/jsm/lines/Line2.js';
+import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from 'framer-motion';
 

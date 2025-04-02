@@ -238,7 +238,7 @@ function CarouselNext({
 }
 
 function CarouselProgress({className, ...props}: React.ComponentProps<"div">) {
-  const { api, selectedIndex, scrollSnaps } = useCarousel()
+  const { selectedIndex, scrollSnaps } = useCarousel()
   
   // Calculate progress percentage
   const progress = ((selectedIndex + 1) / scrollSnaps.length) * 100
