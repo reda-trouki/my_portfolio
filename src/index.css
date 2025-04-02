@@ -248,3 +248,4 @@
 .pagination-nav[disabled] {
     @apply opacity-50 cursor-not-allowed;
 }
+
