@@ -1,6 +1,6 @@
 // FormField.jsx
 import React from 'react';
-import { motion } from 'framer-motion'
+import {motion} from 'framer-motion'
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -13,7 +13,7 @@ interface FormFieldProps {
   icon: React.ReactNode;
   isTextarea?: boolean;
   error?: string;
-  inputProps: React.InputHTMLAttributes<HTMLInputElement> | React.TextareaHTMLAttributes<HTMLTextAreaElement>;
+  inputProps: React.InputHTMLAttributes<HTMLInputElement> & Partial<React.TextareaHTMLAttributes<HTMLTextAreaElement>>;
 }
 
 const FormField = ({
@@ -41,7 +41,7 @@ const FormField = ({
             name={id}
             placeholder={placeholder}
             className={`bg-gray-800/30 border-gray-700/30 text-white placeholder-gray-400/50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 rounded-xl p-4 pl-10 min-h-[150px] transition-all duration-300 hover:bg-gray-800/40 ${error ? 'border-red-500 ring-2 ring-red-500/20' : ''}`}
-            {...inputProps}
+            {...(inputProps as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
           />
         ) : (
           <Input
