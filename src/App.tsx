@@ -12,6 +12,9 @@ import CustomCursor from "./components/CustomCursor";
 import Footer from './components/Footer';
 import Contact from './components/Contact';
 
+// vercel analytics
+import { Analytics } from '@vercel/analytics/react';
+
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,6 +50,7 @@ function App() {
             <Footer />
           </div>
         </div>
+        <Analytics />
       </div>
     </ApolloProvider>
   );
