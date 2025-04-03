@@ -77,11 +77,6 @@ const Projects = () => {
   // Track expanded descriptions
   const [expandedDescriptions, setExpandedDescriptions] = useState<{ [key: string]: boolean }>({});
 
-  useEffect(() => {
-    if (data) {
-      console.log("Projects data:", data.user.repositories.nodes);
-    }
-  }, [data]);
 
   // Update current slide when carousel moves
   useEffect(() => {
