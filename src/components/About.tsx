@@ -15,7 +15,7 @@ const About = () => {
     {
       icon: <GraduationCap className="w-5 h-5" />,
       title: "Education",
-      description: "Master's in Software Development"
+      description: "Master's in Information Systems Engineering"
     },
     {
       icon: <MapPin className="w-5 h-5" />,
