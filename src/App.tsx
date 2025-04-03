@@ -14,6 +14,7 @@ import Contact from './components/Contact';
 
 // vercel analytics
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -51,6 +52,7 @@ function App() {
           </div>
         </div>
         <Analytics />
+        <SpeedInsights />
       </div>
     </ApolloProvider>
   );
