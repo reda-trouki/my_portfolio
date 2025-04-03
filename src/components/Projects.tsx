@@ -298,7 +298,6 @@ const Projects = () => {
                           {/* Languages with enhanced badges */}
                           <div className="flex flex-wrap gap-2 mb-4">
                             {project.languages.nodes
-                              .slice(0, 3)
                               .map((lang: Language) => (
                                 <Badge
                                   key={lang.name}
@@ -317,7 +316,7 @@ const Projects = () => {
                           {/* Topics with improved styling */}
                           <div className="flex flex-wrap gap-2 mb-4 max-h-[60px] overflow-hidden">
                             {project.repositoryTopics.nodes.length > 0 ? (
-                              project.repositoryTopics.nodes.slice(0, 3).map(
+                              project.repositoryTopics.nodes.map(
                                 ({ topic }, index) => (
                                   <span
                                     key={index}
