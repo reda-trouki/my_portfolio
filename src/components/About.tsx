@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion, useInView, useAnimation } from "framer-motion"
-import { Code2, Briefcase, GraduationCap, MapPin, Sparkles, Zap, Heart, Coffee, Calendar, Award, Target, Lightbulb, Brain, Rocket, Users, Star } from "lucide-react"
+import { Code2, Briefcase, GraduationCap, MapPin, Sparkles, Zap, Heart, Coffee, Calendar, Award, Target, Lightbulb} from "lucide-react"
 
 const About = () => {
   const ref = useRef(null);
@@ -439,7 +439,7 @@ const About = () => {
       </div>
 
       {/* Add custom CSS for clip paths */}
-      <style jsx>{`
+      <style>{`
         .clip-path-triangle {
           clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
