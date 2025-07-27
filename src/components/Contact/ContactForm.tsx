@@ -159,7 +159,6 @@ const ContactForm = () => {
                 onKeyDown={handleInput}
                 disabled={isSubmitting}
                 className="w-full bg-black text-green-500 border-none outline-none caret-green-500"
-                autoFocus
               />
               <span className="ml-2 animate-blink">|</span>
             </div>
