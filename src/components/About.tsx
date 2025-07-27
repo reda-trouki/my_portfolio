@@ -6,7 +6,6 @@ const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, margin: "-100px" });
   const controls = useAnimation();
-  const [activeTab, setActiveTab] = useState('skills');
   const [typedText, setTypedText] = useState('');
 
   const fullText = "Crafting digital experiences that matter...";

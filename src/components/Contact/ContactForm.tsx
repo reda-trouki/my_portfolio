@@ -139,9 +139,20 @@ const ContactForm = () => {
         {!submitStatus && (
           <div>
             <p className="text-sm md:text-lg text-yellow-400">{getPrompt()}</p>
+            {step === 1 && error && (
+              <motion.p
+                className="text-red-400"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                {error}
+              </motion.p>
+            )}
             <div className="flex items-center">
               <span className="pr-2">$</span>
               <input
+                title='input prompt'
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
