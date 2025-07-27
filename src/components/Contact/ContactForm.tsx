@@ -1,47 +1,63 @@
-// ContactForm.jsx
-import React from 'react';
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Send, Loader2, User, Mail, MessageCircleMore } from "lucide-react";
+// ContactForm.tsx
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useForm } from 'react-hook-form';
-import FormField from './FormField';
 import emailjs from '@emailjs/browser';
 
-interface FormData {
-  name: string;
-  email: string;
-  message: string;
-}
-
 const ContactForm = () => {
-  const { 
-    register, 
-    handleSubmit, 
-    formState: { errors, isSubmitting }, 
-    reset 
-  } = useForm<FormData>({
-    defaultValues: {
-      name: '',
-      email: '',
-      message: ''
+  const [step, setStep] = useState(0);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [input, setInput] = useState('');
+  const [error, setError] = useState<string | null>(null);
+
+  const handleInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const trimmedInput = input.trim();
+      if (!trimmedInput) return;
+
+      if (step === 0) {
+        setFormData({ ...formData, name: trimmedInput });
+        setStep(1);
+        setError(null);
+      } else if (step === 1) {
+        if (!validateEmail(trimmedInput)) {
+          setError("❌ Invalid email address. Please try again.");
+          return;
+        }
+        setFormData({ ...formData, email: trimmedInput });
+        setStep(2);
+        setError(null);
+      } else if (step === 2) {
+        setFormData({ ...formData, message: trimmedInput });
+        handleSubmit();
+      }
+      setInput('');
+    } else {
+      if (step === 2) {
+        setInput(e.currentTarget.value);
+        setFormData({ ...formData, message: e.currentTarget.value });
+      }
     }
-  });
+  };
 
-  const [submitStatus, setSubmitStatus] = React.useState<'success' | 'error' | null>(null);
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    return emailRegex.test(email);
+  };
 
-  const onSubmit = async (data: FormData) => {
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
     try {
       const templateParams = {
-        name: data.name,
-        email: data.email,
-        message: data.message,
+        name: formData.name,
+        email: formData.email,
+        message: formData.message, // Ensure the message is included here
         to_name: "Reda",
       };
 
-      // Initialize EmailJS with your public key
       emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
-
       const response = await emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
@@ -51,15 +67,22 @@ const ContactForm = () => {
 
       if (response.status === 200) {
         setSubmitStatus('success');
-        reset();
-        setTimeout(() => setSubmitStatus(null), 5000);
       } else {
         setSubmitStatus('error');
       }
     } catch (error) {
       console.error('Error sending email:', error);
       setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
     }
+  };
+
+  const getPrompt = () => {
+    if (step === 0) return "👤 Enter your full name:";
+    if (step === 1) return "📧 Enter your email:";
+    if (step === 2) return "💬 Enter your message:";
+    return "";
   };
 
   return (
@@ -67,110 +90,71 @@ const ContactForm = () => {
       initial={{ opacity: 0, x: 50 }}
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8, delay: 0.4 }}
+      className="relative bg-black text-green-500 font-mono p-6 rounded-lg shadow-lg"
     >
-      <Card className="bg-gray-900/40 backdrop-blur-2xl border border-gray-700/30 shadow-2xl rounded-3xl overflow-hidden">
-        <CardContent className="p-8 space-y-8">
-          {/* Form header */}
-          <div className="space-y-2">
-            <h3 className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-              Send a Message
-            </h3>
-            <p className="text-gray-400">I'll get back to you as soon as possible.</p>
-          </div>
+      {/* Terminal header */}
+      <div className="absolute top-0 left-0 w-full flex items-center gap-2 mb-4 p-2 rounded-t-md bg-white/25 backdrop-blur-lg">
+        <div className="flex gap-2">
+          <span className="w-3 h-3 bg-red-500 rounded-full"></span>
+          <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
+          <span className="w-3 h-3 bg-green-500 rounded-full"></span>
+        </div>
+      </div>
+      <div className="space-y-4 my-4">
+        <div className="whitespace-pre-wrap">
+          <p className="text-sm md:text-lg font-bold text-blue-400">Welcome to Reda Trouki's Terminal!</p>
+          <p className="text-xs md:text-base">Type your responses below and press Enter to proceed.</p>
+          <p className="text-xs md:text-base italic text-gray-400">"Connecting with creativity..."</p>
+          <p>------------------------------------</p>
+          {step > 0 && <p><span className="text-blue-400">Name:</span> {formData.name}</p>}
+          {step > 1 && <p><span className="text-blue-400">Email:</span> {formData.email}</p>}
+          {step === 2 && <p><span className="text-blue-400">Message:</span> {formData.message}</p>}
+        </div>
 
-          {/* Form fields */}
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <div className="space-y-6">
-              <FormField 
-                id="name"
-                label="Name"
-                icon={<User className="w-6 h-6" />}
-                placeholder="Your name"
-                error={errors.name?.message}
-                inputProps={{
-                  ...register('name', { 
-                    required: 'Name is required',
-                    minLength: { value: 2, message: 'Name must be at least 2 characters' }
-                  })
-                }}
-              />
+        {/* Success message */}
+        {submitStatus === 'success' && (
+          <motion.p
+            className="text-green-400"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            ✅ Message sent successfully! 🎉 Thank you for reaching out. I'll get back to you soon.
+          </motion.p>
+        )}
 
-              <FormField 
-                id="email"
-                label="Email"
-                type="email"
-                icon={<Mail className="w-6 h-6" />}
-                placeholder="Your email"
-                error={errors.email?.message}
-                inputProps={{
-                  ...register('email', { 
-                    required: 'Email is required',
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: 'Invalid email address'
-                    }
-                  })
-                }}
-              />
+        {/* Error message */}
+        {submitStatus === 'error' && (
+          <motion.p
+            className="text-red-400"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            ❌ Failed to send message. Please try again. 😢
+          </motion.p>
+        )}
 
-              <FormField 
-                id="message"
-                label="Message"
-                icon={<MessageCircleMore className="w-6 h-6" />}
-                placeholder="Tell me about your project..."
-                isTextarea={true}
-                error={errors.message?.message}
-                inputProps={{
-                  ...register('message', { 
-                    required: 'Message is required',
-                    minLength: { value: 10, message: 'Message must be at least 10 characters' },
-                    maxLength: { value: 1000, message: 'Message must be less than 1000 characters' }
-                  })
-                }}
+        {/* Input prompt */}
+        {!submitStatus && (
+          <div>
+            <p className="text-sm md:text-lg text-yellow-400">{getPrompt()}</p>
+            <div className="flex items-center">
+              <span className="pr-2">$</span>
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleInput}
+                disabled={isSubmitting}
+                className="w-full bg-black text-green-500 border-none outline-none caret-green-500"
+                autoFocus
               />
+              <span className="ml-2 animate-blink">|</span>
             </div>
-
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center group"
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                  Sending...
-                </>
-              ) : (
-                <>
-                  <Send className="w-5 h-5 mr-2 group-hover:translate-x-1 transition-transform" />
-                  Send Message
-                </>
-              )}
-            </Button>
-
-            {submitStatus === 'success' && (
-              <motion.p 
-                className="text-green-500 text-center"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                Message sent successfully!
-              </motion.p>
-            )}
-            {submitStatus === 'error' && (
-              <motion.p 
-                className="text-red-500 text-center"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                Failed to send message. Please try again.
-              </motion.p>
-            )}
-          </form>
-        </CardContent>
-      </Card>
+          </div>
+        )}
+      </div>
     </motion.div>
   );
 };

@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion, useInView, useAnimation } from "framer-motion"
-import { Code2, Briefcase, GraduationCap, MapPin, Sparkles, Zap, Heart, Coffee, Calendar, Award, Target, Lightbulb} from "lucide-react"
+import { Code2, Briefcase, GraduationCap, MapPin, Sparkles, Zap, Heart, Coffee, Calendar, Award, Target, Lightbulb } from "lucide-react"
 
 const About = () => {
   const ref = useRef(null);
@@ -8,9 +8,9 @@ const About = () => {
   const controls = useAnimation();
   const [activeTab, setActiveTab] = useState('skills');
   const [typedText, setTypedText] = useState('');
-  
+
   const fullText = "Crafting digital experiences that matter...";
-  
+
   useEffect(() => {
     if (isInView) {
       controls.start("visible");
@@ -59,27 +59,25 @@ const About = () => {
   ];
 
   const primarySkills = [
-    { name: "React", icon: "⚛️", color: "from-blue-400 to-blue-600", level: 95 },
-    { name: "Next.js", icon: "▲", color: "from-gray-600 to-gray-800", level: 90 },
-    { name: "Spring Boot", icon: "☕", color: "from-green-500 to-green-700", level: 85 },
-    { name: "Node.js", icon: "🟢", color: "from-green-400 to-green-600", level: 88 },
-    { name: "TypeScript", icon: "📘", color: "from-blue-500 to-blue-700", level: 92 },
-    { name: "React Native", icon: "📱", color: "from-cyan-400 to-cyan-600", level: 80 },
+    { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"},
+    { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"},
+    { name: "TailwindCSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original-wordmark.svg" },
+    { name: "Storybook", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/storybook/storybook-original.svg"},
+    { name: "GraphQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" },
+    { name: "NestJS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg"},
   ];
 
   const additionalSkills = [
-    { name: "Python", icon: "🐍" },
-    { name: "Laravel", icon: "🔺" },
-    { name: "Angular", icon: "🅰️" },
-    { name: "Vue.js", icon: "💚" },
-    { name: "NestJS", icon: "🦅" },
-    { name: "Docker", icon: "🐳" },
-    { name: "MongoDB", icon: "🍃" },
-    { name: "PostgreSQL", icon: "🐘" },
-    { name: "Express.js", icon: "⚡" },
-    { name: "GraphQL", icon: "📊" },
-    { name: "Redux", icon: "🔄" },
-    { name: "Git", icon: "📂" }
+    { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+    { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
+    { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+    { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+    { name: "Express.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+    { name: "Redux", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" },
+    { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+    { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+    { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+    { name: "Spring", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" },
   ];
 
   const timelineEvents = [
@@ -117,7 +115,7 @@ const About = () => {
         { name: "React", icon: "⚛️" },
         { name: "Node.js", icon: "🟢" },
         { name: "React Native", icon: "📱" },
-        { name: "TypeScript" , icon: "🚀"}
+        { name: "TypeScript", icon: "🚀" }
       ],
       color: "from-green-500 to-blue-500"
     },
@@ -167,27 +165,27 @@ const About = () => {
   ];
 
   const interests = [
-    { 
-      name: "Problem Solving", 
-      icon: "🧩", 
+    {
+      name: "Problem Solving",
+      icon: "🧩",
       description: "Love tackling complex challenges",
       gradient: "from-blue-500 to-purple-500"
     },
-    { 
-      name: "Open Source", 
-      icon: "🌟", 
+    {
+      name: "Open Source",
+      icon: "🌟",
       description: "Contributing to community projects",
       gradient: "from-green-500 to-blue-500"
     },
-    { 
-      name: "Learning", 
-      icon: "📚", 
+    {
+      name: "Learning",
+      icon: "📚",
       description: "Always exploring new technologies",
       gradient: "from-orange-500 to-pink-500"
     },
-    { 
-      name: "Innovation", 
-      icon: "💡", 
+    {
+      name: "Innovation",
+      icon: "💡",
       description: "Building the future, one app at a time",
       gradient: "from-yellow-500 to-red-500"
     }
@@ -328,16 +326,16 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden min-h-screen">
+    <section id="about" className="py-10 md:py-16 relative overflow-hidden min-h-screen">
       {/* Enhanced animated background with floating shapes */}
       <div className="absolute inset-0">
         {/* Base gradient backgrounds */}
         <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_400px_at_20%_70%,rgba(59,130,246,0.15),transparent)] sm:bg-[radial-gradient(circle_600px_at_20%_70%,rgba(59,130,246,0.15),transparent)] lg:bg-[radial-gradient(circle_800px_at_20%_70%,rgba(59,130,246,0.15),transparent)] animate-pulse"></div>
-        <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_300px_at_80%_30%,rgba(168,85,247,0.1),transparent)] sm:bg-[radial-gradient(circle_500px_at_80%_30%,rgba(168,85,247,0.1),transparent)] lg:bg-[radial-gradient(circle_600px_at_80%_30%,rgba(168,85,247,0.1),transparent)] animate-pulse" style={{animationDelay: '1s'}}></div>
-        
+        <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_300px_at_80%_30%,rgba(168,85,247,0.1),transparent)] sm:bg-[radial-gradient(circle_500px_at_80%_30%,rgba(168,85,247,0.1),transparent)] lg:bg-[radial-gradient(circle_600px_at_80%_30%,rgba(168,85,247,0.1),transparent)] animate-pulse" style={{ animationDelay: '1s' }}></div>
+
         {/* Grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(59,130,246,0.1)_1px,transparent_1px)] bg-[size:50px_50px] sm:bg-[size:75px_75px] lg:bg-[size:100px_100px] opacity-20"></div>
-        
+
         {/* Dynamic floating shapes */}
         {floatingShapes.map((shapeConfig) => (
           <motion.div
@@ -363,7 +361,7 @@ const About = () => {
             )}
           </motion.div>
         ))}
-        
+
         {/* Additional ambient floating elements */}
         <motion.div
           className="absolute top-1/4 left-1/3 w-16 h-16 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-2xl"
@@ -383,7 +381,7 @@ const About = () => {
           }}
           transition={{ duration: 12, repeat: Infinity, delay: 2 }}
         />
-        
+
         {/* Smaller particle-like shapes */}
         {Array.from({ length: 8 }).map((_, index) => (
           <motion.div
@@ -406,7 +404,7 @@ const About = () => {
             }}
           />
         ))}
-        
+
         {/* Larger decorative shapes with slower movement */}
         <motion.div
           className="absolute top-10 right-10 w-32 h-32 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-full blur-3xl hidden xl:block"
@@ -421,7 +419,7 @@ const About = () => {
             ease: "linear"
           }}
         />
-        
+
         <motion.div
           className="absolute bottom-20 left-10 w-40 h-40 bg-gradient-to-tr from-cyan-500/5 to-blue-500/5 clip-path-hexagon blur-3xl hidden xl:block"
           animate={{
@@ -450,9 +448,9 @@ const About = () => {
           clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
         }
       `}</style>
-      
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div 
+        <motion.div
           ref={ref}
           initial={{ opacity: 0 }}
           animate={{ opacity: isInView ? 1 : 0 }}
@@ -469,7 +467,7 @@ const About = () => {
             <div className="relative inline-block">
               <motion.div
                 className="absolute -inset-3 sm:-inset-4 lg:-inset-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full opacity-20 blur-xl sm:blur-2xl"
-                animate={{ 
+                animate={{
                   scale: [1, 1.2, 1],
                   rotate: [0, 180, 360]
                 }}
@@ -483,7 +481,7 @@ const About = () => {
                 <Zap className="h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8 text-purple-400" />
               </div>
             </div>
-            <motion.p 
+            <motion.p
               className="mt-6 sm:mt-8 text-lg sm:text-xl text-white/70 font-mono max-w-xs sm:max-w-lg lg:max-w-2xl mx-auto px-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -508,11 +506,11 @@ const About = () => {
             className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16 sm:mb-20"
           >
             {details.map((detail, index) => (
-              <motion.div 
-                key={index} 
+              <motion.div
+                key={index}
                 className="group relative p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20"
-                whileHover={{ 
-                  y: -8, 
+                whileHover={{
+                  y: -8,
                   scale: 1.02,
                   rotateY: 2
                 }}
@@ -520,7 +518,7 @@ const About = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index, duration: 0.6 }}
               >
-                <motion.div 
+                <motion.div
                   className={`absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br ${detail.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
                 />
                 <div className="relative text-center sm:text-left">
@@ -556,11 +554,11 @@ const About = () => {
                 A timeline of my growth, challenges overcome, and technologies mastered
               </p>
             </div>
-            
+
             <div className="relative max-w-6xl mx-auto">
               {/* Timeline Line - Hidden on mobile, visible on larger screens */}
               <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 via-purple-500 to-green-500 opacity-30"></div>
-              
+
               <div className="space-y-8 sm:space-y-12 lg:space-y-16">
                 {timelineEvents.map((event, index) => (
                   <motion.div
@@ -574,9 +572,9 @@ const About = () => {
                     <div className={`lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 z-10 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full bg-gradient-to-r ${event.color} flex items-center justify-center text-white shadow-2xl border-4 border-gray-900 mb-4 lg:mb-0`}>
                       {event.icon}
                     </div>
-                    
+
                     {/* Event Content - Responsive layout */}
-                    <motion.div 
+                    <motion.div
                       className={`w-full lg:w-5/12 ${index % 2 === 0 ? 'lg:mr-auto lg:pr-12' : 'lg:ml-auto lg:pl-12'}`}
                       whileHover={{ scale: 1.01 }}
                     >
@@ -590,7 +588,7 @@ const About = () => {
                         <p className="text-white/70 mb-6 sm:mb-8 leading-relaxed text-base sm:text-lg">{event.description}</p>
                         <div className="flex flex-wrap gap-2 sm:gap-3">
                           {event.tech.map((tech, techIndex) => (
-                            <span 
+                            <span
                               key={techIndex}
                               className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-3 bg-white/10 text-white/80 rounded-full border border-white/20 hover:bg-white/20 transition-colors"
                             >
@@ -667,21 +665,21 @@ const About = () => {
                 {/* Responsive floating elements */}
                 <motion.div
                   className="absolute -top-3 -right-3 sm:-top-6 sm:-right-6 w-12 h-12 sm:w-20 sm:h-20 bg-gradient-to-r from-blue-500/15 to-purple-500/15 rounded-full blur-xl sm:blur-2xl"
-                  animate={{ 
+                  animate={{
                     scale: [1, 1.3, 1],
-                    rotate: [0, 180, 360] 
+                    rotate: [0, 180, 360]
                   }}
                   transition={{ duration: 8, repeat: Infinity }}
                 />
                 <motion.div
                   className="absolute -bottom-3 -left-3 sm:-bottom-6 sm:-left-6 w-10 h-10 sm:w-16 sm:h-16 bg-gradient-to-r from-green-500/15 to-blue-500/15 rounded-full blur-xl sm:blur-2xl"
-                  animate={{ 
+                  animate={{
                     scale: [1, 0.7, 1],
-                    rotate: [360, 180, 0] 
+                    rotate: [360, 180, 0]
                   }}
                   transition={{ duration: 6, repeat: Infinity }}
                 />
-                
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 relative z-10">
                   {interests.map((interest, index) => (
                     <motion.div
@@ -689,7 +687,7 @@ const About = () => {
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.1 * index }}
-                      whileHover={{ 
+                      whileHover={{
                         scale: 1.02,
                         y: -5,
                         rotateY: 5,
@@ -718,147 +716,68 @@ const About = () => {
           </div>
 
           {/* Skills Showcase - Enhanced responsive design */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
             transition={{ duration: 0.8, delay: 0.5 }}
             className="mb-12 sm:mb-16"
           >
             <div className="text-center mb-8 sm:mb-12">
-              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">Technical Expertise</h3>
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">Skills & Technologies</h3>
               <p className="text-white/60 max-w-2xl mx-auto px-4">
                 Technologies and tools I use to bring ideas to life
               </p>
             </div>
 
-            {/* Tab Navigation - Responsive */}
-            <div className="flex gap-1 sm:gap-2 mb-6 sm:mb-8 p-1 sm:p-2 bg-white/5 rounded-xl sm:rounded-2xl backdrop-blur-sm border border-white/10 max-w-xs sm:max-w-md mx-auto">
-              {[
-                { id: 'skills', label: 'Skills', icon: '⚡' },
-                { id: 'tools', label: 'Tools', icon: '🛠️' }
-              ].map((tab) => (
-                <motion.button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 py-2 sm:py-3 px-2 sm:px-4 rounded-lg sm:rounded-xl font-medium transition-all duration-300 text-sm sm:text-base ${
-                    activeTab === tab.id 
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg' 
-                      : 'text-white/70 hover:text-white hover:bg-white/10'
-                  }`}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <span>{tab.icon}</span>
-                  <span className="hidden xs:inline">{tab.label}</span>
-                </motion.button>
-              ))}
-            </div>
-
-            {/* Skills Content - Responsive */}
-            <div className="relative max-w-4xl mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 rounded-2xl sm:rounded-3xl filter blur-2xl sm:blur-3xl"></div>
-              
-              {activeTab === 'skills' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="relative z-10 space-y-6 sm:space-y-8 p-4 sm:p-6 lg:p-8 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl sm:rounded-3xl"
-                >
-                  <div>
-                    <h3 className="text-white/90 text-lg sm:text-xl font-semibold mb-6 sm:mb-8 text-center flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
-                      <span className="text-2xl sm:text-3xl">🎯</span>
-                      <span>Primary Expertise</span>
-                    </h3>
-                    <div className="space-y-4 sm:space-y-6">
-                      {primarySkills.map((skill, index) => (
-                        <motion.div
-                          key={skill.name}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.1 * index }}
-                          className="group relative"
-                        >
-                          <div className="flex items-center justify-between mb-2 sm:mb-3">
-                            <div className="flex items-center gap-2 sm:gap-4">
-                              <span className="text-2xl sm:text-3xl">
-                                {skill.icon}
-                              </span>
-                              <span className="font-medium text-white/90 text-base sm:text-lg">{skill.name}</span>
-                            </div>
-                            <span className="text-white/70 font-mono text-sm sm:text-base">{skill.level}%</span>
-                          </div>
-                          <div className="relative h-2 sm:h-3 bg-white/10 rounded-full overflow-hidden">
-                            <motion.div
-                              className={`absolute top-0 left-0 h-full bg-gradient-to-r ${skill.color} rounded-full shadow-lg`}
-                              initial={{ width: 0 }}
-                              animate={{ width: `${skill.level}%` }}
-                              transition={{ delay: 0.5 + index * 0.1, duration: 1, ease: "easeOut" }}
-                            />
-                            <motion.div
-                              className="absolute top-0 left-0 h-full bg-white/20 rounded-full"
-                              initial={{ width: 0 }}
-                              animate={{ width: `${skill.level}%` }}
-                              transition={{ delay: 0.7 + index * 0.1, duration: 0.3 }}
-                            />
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-
-              {activeTab === 'tools' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="relative z-10 p-4 sm:p-6 lg:p-8 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl sm:rounded-3xl"
-                >
-                  <h3 className="text-white/90 text-lg sm:text-xl font-semibold mb-6 sm:mb-8 text-center flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
-                    <span className="text-2xl sm:text-3xl">🛠️</span>
-                    <span>Development Tools & Technologies</span>
-                  </h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-                    {additionalSkills.map((skill, index) => (
-                      <motion.div
-                        key={skill.name}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.05 * index }}
-                        whileHover={{ scale: 1.1, y: -5 }}
-                        className="p-3 sm:p-4 lg:p-6 rounded-xl sm:rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-center group shadow-lg"
-                      >
-                        <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">
-                          {skill.icon}
-                        </div>
-                        <div className="text-xs sm:text-sm font-medium text-white/80 group-hover:text-white transition-colors">
-                          {skill.name}
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </div>
-          </motion.div>
-
-          {/* Enhanced CTA Button - Responsive */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 30 }}
-            transition={{ duration: 0.6, delay: 1 }}
-            className="text-center px-4"
-          >
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="group relative inline-flex items-center gap-2 sm:gap-4 px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-semibold text-sm sm:text-base lg:text-lg overflow-hidden shadow-2xl shadow-blue-500/25"
+            <div className="relative max-w-full mx-auto">
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    className="relative z-10 p-4 sm:p-6 lg:p-8"
+  >
+    <div className="overflow-hidden relative">
+      <motion.div
+        className="flex items-center gap-8 sm:gap-10 lg:gap-12"
+        animate={{ x: ["0%", "-50%"] }} // Move by 50% since we're duplicating
+        transition={{
+          duration: 32,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+        style={{
+          display: "inline-flex",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {/* Duplicate skills list to allow seamless loop */}
+        {[...Array(2)].map((_, i) =>
+          primarySkills.concat(additionalSkills).map((skill, index) => (
+            <div
+              key={`skill-${i}-${index}`}
+              className="w-24 h-24 flex flex-col items-center text-center"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <span className="relative text-center sm:text-left">Let's Create Something Amazing Together</span>
-              <span className="relative text-xl sm:text-2xl">🚀</span>
-            </motion.a>
+              <img
+                src={skill.icon}
+                alt={skill.name}
+                height={60}
+                className="w-16 h-16 mb-2 sm:mb-3 object-contain"
+              />
+              <div className="text-xs sm:text-sm font-medium text-white/80">
+                {skill.name}
+              </div>
+            </div>
+          ))
+        )}
+      </motion.div>
+    </div>
+    <style>{`
+      .overflow-hidden {
+        overflow: hidden;
+      }
+    `}</style>
+  </motion.div>
+</div>
+
           </motion.div>
         </motion.div>
       </div>

@@ -14,7 +14,8 @@ export function Hero() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true);
+    const timeout = setTimeout(() => setIsVisible(true), 100); // Delay visibility for smoother load
+    return () => clearTimeout(timeout);
   }, []);
 
   const words = [
@@ -23,14 +24,23 @@ export function Hero() {
     { text: " | ", className: "text-gray-500" },
     { text: "Mobile", className: "text-amber-400" },
     { text: "Developer", className: "font-bold" },
-    { text: ".", className: "" }
+    { text: ".", className: "" },
   ];
 
   return (
-    <section id="home" className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden pt-5 px-4 sm:px-6">
+    <section
+      id="home"
+      className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden pt-5 px-4 sm:px-6 snap-start snap-always"
+    >
       {/* Background grid effect */}
-      {/* <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:50px_50px] opacity-20 z-0"></div>
-       */}
+      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:50px_50px] opacity-10 z-0 pointer-events-none"></div>
+
+      {/* Background stars effect */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute w-[200%] h-[200%] bg-[radial-gradient(circle,rgba(255,255,255,0.1),transparent)] opacity-5 animate-spin-slow"></div>
+        <div className="absolute inset-0 bg-[url('/path-to-stars.svg')] bg-cover opacity-20"></div>
+      </div>
+
       {/* Social Links - Fixed on left side (hidden on very small screens) */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
@@ -64,7 +74,7 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.8 }}
             transition={{ duration: 0.5 }}
-            className="mb-4 sm:mb-6 px-3 sm:px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm"
+            className="mb-4 sm:mb-6 px-3 sm:px-4 py-1.5 rounded-full border border-white/10 bg-gradient-to-r from-green-400/20 to-green-500/10 backdrop-blur-sm"
           >
             <span className="inline-flex items-center text-xs sm:text-sm">
               <span className="relative flex h-2 w-2 mr-2">
@@ -82,7 +92,7 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-3 sm:mb-4"
           >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 animate-text-glow">
               Reda Trouki
             </span>
           </motion.h1>
@@ -181,8 +191,8 @@ export function Hero() {
       </div>
 
       {/* Gradient orbs for visual effect - enhanced for mobile */}
-      <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_400px_at_5%_90%,rgba(59,130,246,0.3),transparent)] sm:bg-[radial-gradient(circle_500px_at_5%_90%,rgba(59,130,246,0.3),transparent)]"></div>
-      <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_400px_at_95%_20%,rgba(168,85,247,0.3),transparent)] sm:bg-[radial-gradient(circle_500px_at_95%_20%,rgba(168,85,247,0.3),transparent)]"></div>
+      <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_400px_at_5%_90%,rgba(59,130,246,0.4),transparent)] sm:bg-[radial-gradient(circle_500px_at_5%_90%,rgba(59,130,246,0.4),transparent)]"></div>
+      <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_400px_at_95%_20%,rgba(168,85,247,0.4),transparent)] sm:bg-[radial-gradient(circle_500px_at_95%_20%,rgba(168,85,247,0.4),transparent)]"></div>
     </section>
   );
 }

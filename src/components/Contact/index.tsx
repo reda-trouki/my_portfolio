@@ -14,8 +14,8 @@ const Contact = () => {
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-5xl md:text-6xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500"
+          transition={{ duration: 0.8, ease: "easeOut", staggerChildren: 0.2 }}
+          className="text-5xl md:text-6xl font-bold text-center  bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500"
         >
           Let's Connect
         </motion.h2>
